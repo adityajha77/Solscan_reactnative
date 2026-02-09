@@ -1,0 +1,26 @@
+LEARN ABOUT STL LIBRARIES LIKE MAP , SETS , MULTI SETS , VECTOR , LISTS , UNORDERED LISTS ,PBDS(orderd set)   below are the explanations 
+
+
+ORDERED_SET
+order_of_key(k): This function returns the number of elements strictly smaller than a given key k in the ordered set.
+find_by_order(k): This function returns an iterator to the k-th element (0-indexed) in the sorted set. 
+
+KADANE'S ALGO RITHM TO FIND THE MAX SUM OF THE SUBARRAY
+
+//use pairs if you want to sort the array and want to print the actual array positions
+
++1 and -1 logic in number line problems we get to know what are max value it goes and we can track
+
+//jsoepg problem 2 of sorting 
+//circular array things to keep in mind 
+use mod to come back to proper position to handle out of bound 
+//to use (position +index)%size
+we want sorted array effective remove and mod logic 
+best to use set but mod application can be there in set 
+*** use PBDS GNU LIBRARY PROVIDE THIS ORDERED_SET ***
+PROVIDE
+find_by_order(idx);
+and iterator; 
+time complexity is logn;
+also provide order_of_the_key(element)
+only for c++
