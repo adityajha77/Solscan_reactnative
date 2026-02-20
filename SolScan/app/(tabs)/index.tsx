@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
+import { useRouter } from "expo-router";
 import {
   SafeAreaView,
   View,
@@ -79,9 +80,10 @@ const timeAgo = (ts: number) => {
   if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
   return `${Math.floor(s / 86400)}d ago`;
 };
+const router = useRouter();
 
 // --- Main Component ---
-export function WalletScreen() {
+export default function WalletScreen() {
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const [balance, setBalance] = useState<number | null>(null);
@@ -163,20 +165,26 @@ export function WalletScreen() {
             </View>
 
             {/* Tokens List */}
-            {tokens.length > 0 && (
-              <View>
-                <Text style={s.section}>Tokens ({tokens.length})</Text>
-                {tokens.map((t) => (
-                  <View key={t.mint} style={s.row}>
-                    <View>
-                        <Text style={s.mintLabel}>Mint Address</Text>
-                        <Text style={s.mint}>{short(t.mint, 6)}</Text>
-                    </View>
-                    <Text style={s.amount}>{t.amount.toLocaleString()}</Text>
-                  </View>
-                ))}
-              </View>
-            )}
+{tokens.length > 0 && (
+  <View>
+    <Text style={s.section}>Tokens ({tokens.length})</Text>
+
+    {tokens.map((t) => (
+      <TouchableOpacity
+        key={t.mint}
+        style={s.row}
+        onPress={() => router.push(`/token/${t.mint}`)}
+      >
+        <View>
+          <Text style={s.mintLabel}>Mint Address</Text>
+          <Text style={s.mint}>{short(t.mint, 6)}</Text>
+        </View>
+
+        <Text style={s.amount}>{t.amount.toLocaleString()}</Text>
+      </TouchableOpacity>
+    ))}
+  </View>
+)}
 
             {/* Transactions List */}
             {txns.length > 0 && (
